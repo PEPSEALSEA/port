@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEPSEALSEA - GitHub Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-glass: rgba(255, 255, 255, 0.05);
+            --bg-card: rgba(255, 255, 255, 0.08);
+            --accent-primary: #00d4ff;
+            --accent-secondary: #ff3366;
+            --accent-gradient: linear-gradient(135deg, #00d4ff, #ff3366);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.2);
+            --shadow-glow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg-primary);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: var(--bg-glass);
+            border-radius: 16px;
+            padding: 40px 30px;
+            border: 1px solid var(--border-color);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        h1 {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3em;
+            font-weight: 900;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+
+        .loading {
+            text-align: center;
+            color: var(--text-primary);
+            font-size: 1.1em;
+            margin: 60px 0;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(0, 212, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid var(--accent-primary);
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .language-section {
+            margin-bottom: 40px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-color);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .language-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .language-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .language-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .language-title {
+            font-size: 1.8em;
+            color: var(--text-primary);
+            margin-right: 15px;
+            font-weight: 600;
+        }
+
+        .repo-count {
+            background: var(--accent-gradient);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .repos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .repo-card {
+            background: var(--bg-glass);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .repo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow), var(--shadow-card);
+        }
+
+        .repo-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .repo-name a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .repo-name a:hover {
+            color: var(--accent-secondary);
+        }
+
+        .repo-description {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            line-height: 1.5;
+            font-size: 0.9em;
+        }
+
+        .repo-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85em;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .stat:hover {
+            color: var(--accent-primary);
+        }
+
+        .error {
+            background: rgba(255, 51, 102, 0.1);
+            color: #ff6b6b;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 51, 102, 0.3);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-color);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1em;
+            font-weight: 500;
+        }
+
+        .repo-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .live-button, .github-button {
+            padding: 10px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85em;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .live-button {
+            background: var(--accent-gradient);
+            color: white;
+        }
+
+        .live-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .github-button {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .github-button:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.75em;
+            font-weight: bold;
+            border: 1px solid rgba(46, 204, 113, 0.3);
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #2ecc71;
+            border-radius: 50%;
+            animation: livePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes livePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .repos-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .repo-card {
+                padding: 15px;
+            }
+            
+            .stats-overview {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>PEPSEALSEA</h1>
+            <p class="subtitle">GitHub Portfolio Dashboard</p>
+        </header>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Fetching repositories from GitHub...</p>
+        </div>
+
+        <div id="error" class="error" style="display: none;"></div>
+
+        <div id="stats-overview" class="stats-overview" style="display: none;"></div>
+
+        <div id="repositories"></div>
+    </div>
+
+    <script>
+        const languageConfig = {
+            'JavaScript': { color: 'linear-gradient(135deg, #f1e05a, #d4af37)', icon: 'JS' },
+            'Python': { color: 'linear-gradient(135deg, #3572A5, #2d5d87)', icon: '🐍' },
+            'HTML': { color: 'linear-gradient(135deg, #e34c26, #c13018)', icon: 'H' },
+            'CSS': { color: 'linear-gradient(135deg, #1572B6, #0e4b77)', icon: 'C' },
+            'Java': { color: 'linear-gradient(135deg, #b07219, #8b5a15)', icon: '☕' },
+            'C++': { color: 'linear-gradient(135deg, #f34b7d, #d93a69)', icon: 'C++' },
+            'C': { color: 'linear-gradient(135deg, #555555, #333333)', icon: 'C' },
+            'PHP': { color: 'linear-gradient(135deg, #4F5D95, #3d4673)', icon: 'PHP' },
+            'TypeScript': { color: 'linear-gradient(135deg, #2b7489, #1e5a6b)', icon: 'TS' },
+            'React': { color: 'linear-gradient(135deg, #61dafb, #21b7e0)', icon: '⚛️' },
+            'Vue': { color: 'linear-gradient(135deg, #4FC08D, #369870)', icon: 'V' },
+            'Ruby': { color: 'linear-gradient(135deg, #701516, #4a0f10)', icon: '💎' },
+            'Go': { color: 'linear-gradient(135deg, #00ADD8, #0088a8)', icon: 'Go' },
+            'Rust': { color: 'linear-gradient(135deg, #dea584, #c8936b)', icon: '🦀' },
+            'Shell': { color: 'linear-gradient(135deg, #89e051, #6bb83f)', icon: '$' },
+            'Other': { color: 'linear-gradient(135deg, #858585, #666666)', icon: '📄' }
+        };
+
+        function hasLiveSite(repo) {
+            const webLanguages = ['HTML', 'CSS', 'JavaScript', 'TypeScript'];
+            const webKeywords = ['website', 'portfolio', 'landing', 'page', 'site', 'web', 'frontend', 'ui', 'dashboard'];
+            return webLanguages.includes(repo.language) || webKeywords.some(keyword => (repo.name + ' ' + (repo.description || '')).toLowerCase().includes(keyword)) || repo.has_pages;
+        }
+
+        function getLiveSiteUrl(repo) {
+            return `https://pepsealsea.github.io/${repo.name}/`;
+        }
+
+        async function fetchRepositories() {
+            try {
+                const response = await fetch('https://api.github.com/users/PEPSEALSEA/repos?per_page=100&sort=updated');
+                if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
+                const repos = await response.json();
+
+                const reposByLanguage = {};
+                let totalRepos = 0, totalStars = 0, totalForks = 0, languages = new Set();
+
+                repos.forEach(repo => {
+                    const language = repo.language || 'Other';
+                    languages.add(language);
+                    reposByLanguage[language] = reposByLanguage[language] || [];
+                    reposByLanguage[language].push(repo);
+                    totalRepos++;
+                    totalStars += repo.stargazers_count;
+                    totalForks += repo.forks_count;
+                });
+
+                const loadingEl = document.getElementById('loading');
+                loadingEl.style.opacity = '0';
+                setTimeout(() => { loadingEl.style.display = 'none'; }, 300);
+
+                setTimeout(() => { displayStatsOverview(totalRepos, languages.size, totalStars, totalForks); }, 400);
+
+                const sortedLanguages = Object.keys(reposByLanguage).sort((a, b) => reposByLanguage[b].length - reposByLanguage[a].length);
+                setTimeout(() => { displayRepositories(reposByLanguage, sortedLanguages); }, 600);
+            } catch (error) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error').innerHTML = `
+                    <h3>Unable to fetch repositories</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                    <p>Try these alternatives:</p>
+                    <ul style="text-align: left; margin-top: 10px;">
+                        <li>Open from a local web server</li>
+                        <li>Use a web hosting service</li>
+                        <li><a href="https://github.com/PEPSEALSEA" target="_blank" style="color: var(--accent-primary);">Visit GitHub profile</a></li>
+                    </ul>
+                    <button onclick="window.location.reload()" style="margin-top: 10px; padding: 8px 15px; background: var(--accent-gradient); color: white; border: none; border-radius: 20px; cursor: pointer;">Try Again</button>
+                `;
+            }
+        }
+
+        function displayStatsOverview(totalRepos, languageCount, totalStars, totalForks) {
+            document.getElementById('stats-overview').style.display = 'grid';
+            document.getElementById('stats-overview').innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${totalRepos}</div>
+                    <div class="stat-label">Total Repositories</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${languageCount}</div>
+                    <div class="stat-label">Languages Used</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${totalStars}</div>
+                    <div class="stat-label">Total Stars</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${totalForks}</div>
+                    <div class="stat-label">Total Forks</div>
+                </div>
+            `;
+        }
+
+        function displayRepositories(reposByLanguage, sortedLanguages) {
+            const container = document.getElementById('repositories');
+            sortedLanguages.forEach((language, langIndex) => {
+                const repos = reposByLanguage[language];
+                const config = languageConfig[language] || languageConfig['Other'];
+                const section = document.createElement('div');
+                section.className = 'language-section';
+                section.style.animationDelay = `${langIndex * 0.2}s`;
+                section.innerHTML = `
+                    <div class="language-header">
+                        <div class="language-icon" style="background: ${config.color}">${config.icon}</div>
+                        <div class="language-title">${language}</div>
+                        <div class="repo-count">${repos.length} repos</div>
+                    </div>
+                    <div class="repos-grid">
+                        ${repos.map((repo, index) => `
+                            <div class="repo-card" style="animation-delay: ${index * 0.1}s">
+                                <div class="repo-name">
+                                    <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+                                    ${hasLiveSite(repo) ? '<div class="live-indicator"><div class="live-dot"></div>Live Site</div>' : ''}
+                                </div>
+                                <div class="repo-description">${repo.description || 'No description available'}</div>
+                                <div class="repo-stats">
+                                    <div class="stat"><span>⭐</span><span>${repo.stargazers_count}</span></div>
+                                    <div class="stat"><span>🍴</span><span>${repo.forks_count}</span></div>
+                                    <div class="stat"><span>📅</span><span>${new Date(repo.updated_at).toLocaleDateString()}</span></div>
+                                </div>
+                                <div class="repo-buttons">
+                                    <a href="${repo.html_url}" target="_blank" class="github-button"><span>📁</span>View Code</a>
+                                    ${hasLiveSite(repo) ? `<a href="${getLiveSiteUrl(repo)}" target="_blank" class="live-button"><span>🌐</span>View Live Site</a>` : ''}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.appendChild(section);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchRepositories);
+    </script>
+</body>
+</html>
