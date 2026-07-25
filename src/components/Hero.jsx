@@ -1,4 +1,8 @@
-export default function Hero() {
+import { formatRelativeTime } from '../utils/time'
+
+export default function Hero({ lastCommitAt }) {
+  const relative = formatRelativeTime(lastCommitAt)
+
   return (
     <section className="hero-band" aria-labelledby="hero-title">
       <div className="container">
@@ -13,6 +17,11 @@ export default function Hero() {
           A curated dashboard of repositories, grouped by language and ranked by activity. Built for
           developers who ship.
         </p>
+        {relative ? (
+          <p className="hero-last-commit" title={lastCommitAt ? new Date(lastCommitAt).toLocaleString() : undefined}>
+            Last commit {relative}
+          </p>
+        ) : null}
         <div className="hero-actions">
           <a href="#repositories" className="btn btn-lg btn-primary">
             Browse projects

@@ -1,6 +1,7 @@
 import { languageConfig } from '../data/languageConfig'
-import { getLiveSiteUrl, hasLiveSite } from '../utils/repos'
 import { useReveal } from '../hooks/useReveal'
+import { getLiveSiteUrl, hasLiveSite } from '../utils/repos'
+import { formatRelativeTime } from '../utils/time'
 
 export default function Repositories({ sections }) {
   const containerRef = useReveal([sections])
@@ -48,9 +49,15 @@ export default function Repositories({ sections }) {
                       <span aria-hidden="true">⑂</span>
                       <span>{repo.forks_count}</span>
                     </div>
-                    <div className="stat">
+                    <div
+                      className="stat"
+                      title={new Date(repo.pushed_at || repo.updated_at).toLocaleString()}
+                    >
                       <span aria-hidden="true">↻</span>
-                      <span>{new Date(repo.updated_at).toLocaleDateString()}</span>
+                      <span>
+                        {formatRelativeTime(repo.pushed_at || repo.updated_at) ||
+                          new Date(repo.updated_at).toLocaleDateString()}
+                      </span>
                     </div>
                   </div>
                   <div className="repo-buttons">

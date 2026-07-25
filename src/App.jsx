@@ -11,6 +11,7 @@ import Toolbar from './components/Toolbar'
 import { getLanguagePriority } from './data/languageConfig'
 import { groupReposByLanguage } from './utils/repos'
 import { applyTheme, getInitialTheme, persistTheme } from './utils/theme'
+import { getLatestPushedAt } from './utils/time'
 
 export default function App() {
   const [theme, setTheme] = useState(() => getInitialTheme())
@@ -20,6 +21,7 @@ export default function App() {
   const [reposByLanguage, setReposByLanguage] = useState({})
   const [sortedLanguages, setSortedLanguages] = useState([])
   const [stats, setStats] = useState(null)
+  const [lastCommitAt, setLastCommitAt] = useState(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [activeLanguage, setActiveLanguage] = useState('All')
 
@@ -55,6 +57,7 @@ export default function App() {
           totalStars: grouped.totalStars,
           totalForks: grouped.totalForks,
         })
+        setLastCommitAt(getLatestPushedAt(repos))
         setError(null)
       } catch (err) {
         if (!cancelled) setError(err.message)
@@ -133,7 +136,7 @@ export default function App() {
         />
 
         <main className={`main-content${loading ? ' hidden-until-load' : ' loaded'}`}>
-          <Hero />
+          <Hero lastCommitAt={lastCommitAt} />
           <div className="container">
             <Toolbar
               searchQuery={searchQuery}
