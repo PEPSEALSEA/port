@@ -4,9 +4,10 @@
 
 - React + Vite portfolio app (`src/`, `index.html`, `vite.config.js`)
 - Routes:
-  - `/` — intro home (brand hero, work gallery placeholders, about strip)
+  - `/` — intro home (brand hero, contributions graph, work gallery placeholders, about strip)
   - `/projects` — GitHub repos dashboard
 - Animation / UX plugins: `motion`, `gsap` + `@gsap/react`, `lenis`, `react-router-dom`
+- Contributions graph: `https://github-contributions-api.jogruber.de/v4/<user>?y=last` (no token)
 - Static build output: `dist/` (includes `404.html` copy of `index.html` for GitHub Pages SPA fallback)
 - Deploy target: GitHub Pages at `https://pepsealsea.github.io/port/`
 - Vite `base` must stay `/port/` so assets and router `basename` resolve under the repo path

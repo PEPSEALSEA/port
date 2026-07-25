@@ -1,5 +1,6 @@
 export const profile = {
   name: 'PEPSEALSEA',
+  githubUsername: 'PEPSEALSEA',
   role: 'Developer · builder · open-source tinkerer.',
   headline: 'I ship interfaces, tools, and experiments.',
   lead: 'A portfolio of products, prototypes, and GitHub work — designed to move.',
