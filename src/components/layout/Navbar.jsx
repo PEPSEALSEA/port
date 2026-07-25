@@ -1,21 +1,26 @@
+import { NavLink, Link } from 'react-router-dom'
+
 export default function Navbar({ theme, onToggleTheme, menuOpen, onToggleMenu, onCloseMenu }) {
   return (
     <>
       <nav className="nav-bar" aria-label="Main navigation">
         <div className="nav-inner">
-          <a href="#" className="nav-brand" aria-label="PEPSEALSEA home">
+          <Link to="/" className="nav-brand" aria-label="PEPSEALSEA home" onClick={onCloseMenu}>
             <span className="nav-brand-mark" aria-hidden="true">
               PS
             </span>
             PEPSEALSEA
-          </a>
+          </Link>
           <div className="nav-links">
-            <a href="#repositories" className="nav-link">
+            <NavLink to="/" end className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>
+              Home
+            </NavLink>
+            <NavLink
+              to="/projects"
+              className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+            >
               Projects
-            </a>
-            <a href="#stats-overview" className="nav-link">
-              Stats
-            </a>
+            </NavLink>
             <a
               href="https://github.com/PEPSEALSEA"
               target="_blank"
@@ -27,7 +32,6 @@ export default function Navbar({ theme, onToggleTheme, menuOpen, onToggleMenu, o
           </div>
           <div className="nav-actions">
             <button
-              id="theme-toggle"
               className="nav-cta nav-cta-ghost"
               type="button"
               aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
@@ -44,7 +48,6 @@ export default function Navbar({ theme, onToggleTheme, menuOpen, onToggleMenu, o
               View Profile
             </a>
             <button
-              id="nav-hamburger"
               className="nav-hamburger"
               type="button"
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
@@ -65,16 +68,24 @@ export default function Navbar({ theme, onToggleTheme, menuOpen, onToggleMenu, o
       </nav>
 
       <div
-        id="mobile-menu"
         className={`mobile-menu${menuOpen ? ' open' : ''}`}
         aria-label="Mobile navigation"
       >
-        <a href="#repositories" className="nav-link mobile-nav-link" onClick={onCloseMenu}>
+        <NavLink
+          to="/"
+          end
+          className={({ isActive }) => `nav-link mobile-nav-link${isActive ? ' active' : ''}`}
+          onClick={onCloseMenu}
+        >
+          Home
+        </NavLink>
+        <NavLink
+          to="/projects"
+          className={({ isActive }) => `nav-link mobile-nav-link${isActive ? ' active' : ''}`}
+          onClick={onCloseMenu}
+        >
           Projects
-        </a>
-        <a href="#stats-overview" className="nav-link mobile-nav-link" onClick={onCloseMenu}>
-          Stats
-        </a>
+        </NavLink>
         <a
           href="https://github.com/PEPSEALSEA"
           target="_blank"

@@ -3,9 +3,19 @@
 ## Stack
 
 - React + Vite portfolio app (`src/`, `index.html`, `vite.config.js`)
-- Static build output: `dist/`
+- Routes:
+  - `/` — intro home (brand hero, work gallery placeholders, about strip)
+  - `/projects` — GitHub repos dashboard
+- Animation / UX plugins: `motion`, `gsap` + `@gsap/react`, `lenis`, `react-router-dom`
+- Static build output: `dist/` (includes `404.html` copy of `index.html` for GitHub Pages SPA fallback)
 - Deploy target: GitHub Pages at `https://pepsealsea.github.io/port/`
-- Vite `base` must stay `/port/` so assets resolve under the repo path
+- Vite `base` must stay `/port/` so assets and router `basename` resolve under the repo path
+
+## Placeholder content
+
+- Profile copy: `src/data/profile.js`
+- Work gallery items: `src/data/work.js`
+- Future photos: drop into `public/work/` and wire paths in `work.js` / about photo
 
 ## Local development
 
@@ -22,6 +32,7 @@ Deploy is automated by `.github/workflows/deploy.yml` on every push to `main` (a
 
 1. Build job: `npm ci` → `npm run build` → upload `dist` as Pages artifact
 2. Deploy job: `actions/deploy-pages` publishes the artifact
+3. Build emits `dist/404.html` so deep links like `/port/projects` refresh correctly
 
 One-time GitHub setup (repo Settings → Pages):
 

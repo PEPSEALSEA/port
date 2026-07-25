@@ -1,27 +1,29 @@
+import { Link } from 'react-router-dom'
+
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand-col">
-            <a href="#" className="nav-brand" aria-label="PEPSEALSEA home">
+            <Link to="/" className="nav-brand" aria-label="PEPSEALSEA home">
               <span className="nav-brand-mark" aria-hidden="true">
                 PS
               </span>
               PEPSEALSEA
-            </a>
+            </Link>
             <p className="footer-brand-text">
-              Developer portfolio showcasing open-source projects and experiments on GitHub.
+              Developer portfolio showcasing products, experiments, and open-source work on GitHub.
             </p>
           </div>
           <div>
             <p className="footer-col-title">Navigate</p>
             <ul className="footer-links">
               <li>
-                <a href="#repositories">Projects</a>
+                <Link to="/">Home</Link>
               </li>
               <li>
-                <a href="#stats-overview">Statistics</a>
+                <Link to="/projects">Projects</Link>
               </li>
               <li>
                 <a href="https://github.com/PEPSEALSEA" target="_blank" rel="noopener noreferrer">
@@ -57,7 +59,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <p className="footer-copy">© PEPSEALSEA · Built with GitHub API</p>
+          <p className="footer-copy">© PEPSEALSEA · Built with React + Vite</p>
         </div>
       </div>
     </footer>
