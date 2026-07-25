@@ -114,6 +114,7 @@ export default function ProjectsPage() {
       exit="exit"
       variants={pageFade}
     >
+      <div className="mesh-gradient" aria-hidden="true" />
       <Loading hidden={!loading} />
 
       <section className="projects-hero" aria-labelledby="projects-title">
