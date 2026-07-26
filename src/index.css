@@ -26,9 +26,9 @@
   --color-success: #1a9a8a;
   --color-success-soft: #d4f2ec;
   --color-success-text: #0f6e6e;
-  --horizon-sky: rgba(186, 220, 230, 0.7);
-  --horizon-mid: rgba(150, 205, 195, 0.45);
-  --horizon-sea: rgba(15, 110, 110, 0.2);
+  --horizon-sky: rgba(186, 220, 230, 0.45);
+  --horizon-mid: rgba(150, 205, 195, 0.28);
+  --horizon-sea: rgba(15, 110, 110, 0.12);
   --selection-bg: #12262b;
   --selection-fg: #f4fafb;
   --shadow-soft: 0 1px 2px rgba(18, 38, 43, 0.04);
@@ -64,9 +64,9 @@
   --color-error-soft: rgba(180, 35, 24, 0.18);
   --color-success-soft: rgba(26, 154, 138, 0.18);
   --color-success-text: #5cbcbc;
-  --horizon-sky: rgba(40, 80, 95, 0.55);
-  --horizon-mid: rgba(20, 90, 95, 0.35);
-  --horizon-sea: rgba(15, 110, 110, 0.28);
+  --horizon-sky: rgba(40, 80, 95, 0.35);
+  --horizon-mid: rgba(20, 90, 95, 0.22);
+  --horizon-sea: rgba(15, 110, 110, 0.16);
   --selection-bg: #e8f2f4;
   --selection-fg: #0c181c;
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.25);
@@ -98,35 +98,31 @@ body {
 }
 
 .mesh-gradient {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 420px;
+  height: min(420px, 55vh);
   pointer-events: none;
   z-index: 0;
-  background:
-    linear-gradient(180deg, var(--horizon-sky) 0%, var(--horizon-mid) 48%, transparent 100%),
-    radial-gradient(ellipse 70% 45% at 50% 100%, var(--horizon-sea), transparent 70%);
-  opacity: 0.85;
-  animation: horizonDrift 22s ease-in-out infinite alternate;
-}
-
-:root[data-theme='dark'] .mesh-gradient {
-  opacity: 0.55;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--horizon-sky) 55%, var(--color-canvas-soft)) 0%,
+    color-mix(in srgb, var(--horizon-mid) 35%, var(--color-canvas-soft)) 42%,
+    var(--color-canvas-soft) 100%
+  );
 }
 
 @keyframes horizonDrift {
   from {
-    transform: scale(1) translateY(0);
+    opacity: 0.92;
   }
   to {
-    transform: scale(1.03) translateY(-8px);
+    opacity: 1;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mesh-gradient,
   .intro-hero-horizon {
     animation: none !important;
   }
@@ -1022,6 +1018,7 @@ body {
 }
 
 .page-view {
+  position: relative;
   min-height: 60vh;
 }
 
@@ -1040,8 +1037,10 @@ body {
   pointer-events: none;
   z-index: 0;
   background:
-    linear-gradient(180deg, var(--horizon-sky) 0%, var(--horizon-mid) 42%, transparent 78%),
-    radial-gradient(ellipse 90% 50% at 50% 85%, var(--horizon-sea), transparent 70%);
+    radial-gradient(ellipse 100% 60% at 50% 0%, var(--horizon-sky), transparent 70%),
+    radial-gradient(ellipse 80% 50% at 50% 40%, var(--horizon-mid), transparent 72%),
+    radial-gradient(ellipse 70% 45% at 50% 75%, var(--horizon-sea), transparent 75%),
+    linear-gradient(180deg, transparent 60%, var(--color-canvas-soft) 100%);
   animation: horizonDrift 22s ease-in-out infinite alternate;
 }
 
