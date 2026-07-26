@@ -1,11 +1,10 @@
 export const profile = {
   name: 'PEPSEALSEA',
   githubUsername: 'PEPSEALSEA',
-  role: 'Developer · builder · open-source tinkerer.',
-  headline: 'I ship interfaces, tools, and experiments.',
-  lead: 'A portfolio of products, prototypes, and GitHub work — designed to move.',
+  role: 'Developer',
+  headline: 'Interfaces, tools, and open-source experiments.',
+  lead: 'A quiet portfolio of things I’ve built and shipped.',
   about:
-    'Placeholder bio. Swap this copy when ready. I build web products, playful systems, and open-source experiments with a focus on craft and motion.',
-  photoLabel: 'Portrait coming soon',
+    'I build web products and small systems with care for craft, clarity, and motion. Most of the work lives on GitHub.',
   github: 'https://github.com/PEPSEALSEA',
 }

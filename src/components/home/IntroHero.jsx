@@ -8,7 +8,7 @@ export default function IntroHero() {
 
   return (
     <section className="intro-hero" aria-labelledby="intro-brand">
-      <div className="intro-hero-mesh" aria-hidden="true" />
+      <div className="intro-hero-horizon" aria-hidden="true" />
       <div className="container intro-hero-inner">
         <motion.div
           className="intro-hero-copy"
@@ -36,7 +36,7 @@ export default function IntroHero() {
               href={profile.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-lg btn-secondary"
+              className="text-link"
             >
               GitHub
             </a>

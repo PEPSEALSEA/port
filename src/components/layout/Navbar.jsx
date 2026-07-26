@@ -37,16 +37,8 @@ export default function Navbar({ theme, onToggleTheme, menuOpen, onToggleMenu, o
               aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
               onClick={onToggleTheme}
             >
-              {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+              {theme === 'dark' ? 'Light' : 'Dark'}
             </button>
-            <a
-              href="https://github.com/PEPSEALSEA"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="nav-cta nav-cta-primary"
-            >
-              View Profile
-            </a>
             <button
               className="nav-hamburger"
               type="button"

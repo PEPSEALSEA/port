@@ -65,18 +65,15 @@ export default function ContributionsGraph() {
           viewport={{ once: true, amount: 0.4 }}
           variants={staggerChildren}
         >
-          <motion.p className="section-eyebrow" variants={fadeUp}>
-            GitHub activity
-          </motion.p>
           <motion.h2 id="contrib-heading" className="section-title" variants={fadeUp}>
-            Contributions in the last year.
+            Activity
           </motion.h2>
           <motion.p className="section-lead" variants={fadeUp}>
             {loading
-              ? 'Loading contribution graph…'
+              ? 'Loading…'
               : error
-                ? 'Could not load the contribution graph right now.'
-                : `${total.toLocaleString()} contributions in the last year on GitHub.`}
+                ? 'Could not load the graph right now.'
+                : `${total.toLocaleString()} contributions last year`}
           </motion.p>
         </motion.div>
 
@@ -93,7 +90,7 @@ export default function ContributionsGraph() {
             <p className="contrib-error">
               {error}{' '}
               <a href={profile.github} target="_blank" rel="noopener noreferrer">
-                View profile on GitHub
+                View on GitHub
               </a>
             </p>
           ) : (
